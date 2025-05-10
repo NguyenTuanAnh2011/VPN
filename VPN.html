@@ -1,0 +1,509 @@
+<!DOCTYPE html><html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff"> <!-- Đổi màu thanh trạng thái thành trắng -->
+    <title>Cloud Phone UI</title>
+    <style>
+        
+         /* Hình Hello Kitty */
+        .hello-kitty {
+            position: absolute;
+            top: -130px;
+            right: -10px;
+            width: 80px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .hello-anime {
+            position: absolute;
+            top: -75px;
+            right: 211px;
+            width: 80px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+          /* Màn hình loading */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .notification-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+            width: 300px;
+            position: relative;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border: 2px solid black;
+        }
+
+        .notification-box h2 {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: -10px; /* Đẩy chữ lên một chút */
+    margin-bottom: 10px; /* Tạo khoảng cách dưới */
+}
+
+.notification-box h3,
+.notification-box h4 {
+    margin-bottom: 8px; /* Tạo khoảng cách giữa các dòng */
+}
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .notification-box button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            width: 80px;
+        }
+
+        .notification-box button:hover {
+            background-color: gray;
+        }
+
+        /* Ẩn nội dung chính trước khi thông báo bị tắt */
+        #mainContent {
+            display: none;
+        }
+
+       
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }body {
+        background: url('https://i.imgur.com/8dJbCda.jpeg') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .container {
+        width: 381px;
+        height: 500px;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 10px;
+        padding: 5px;
+    }
+
+    .screen {
+        width: 250px;
+        height: 490px;
+        flex: none;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        scroll-snap-align: center;
+        padding: 15px;
+        border: 1px solid #ffb599;
+        text-align: center;
+        position: relative; 
+        background: url('https://i.imgur.com/5Ld3j7Q.jpeg') no-repeat center center;
+        background-size: cover;
+    }
+
+    .header {
+        background-color: #FF69B4;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        width: auto;
+        position: absolute;
+        top: 10px;
+    }
+
+    .content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .image {
+        width: 80px;
+        height: 80px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .button {
+        background-color: #FF69B4;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 15px;
+    }
+
+    .button:hover {
+        background-color: #FFC0CB;
+    }
+
+    .container::-webkit-scrollbar {
+        display: none;
+    }
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Chặn hiệu ứng nhấn */
+}
+</style>
+
+</head>
+<body><div class="container">
+
+    <div class="screen"><div class="header">Thiết Bị VPN App Launcher V2</div><div class="content"><div class="image"><img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.uncube.launcher3%2Ficon%2Fnow.png&w=256&q=80&w=1440&q=70" alt="App"></div><div class="button" onclick='window.open("https://now.gg/apps/uncube/10005/now.html","_blank")'>Vào Chơi</div></div></div>
+    <!-- Màn hình 1 -->
+    <div class="screen">
+        <div class="header">Thiết Bị VPN Nhiều Game</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.aptoide.partners.nowgg.store%2Ficon%2Faptoide.png&w=256&q=80&w=1440&q=70" alt="Genshin Impact">
+            </div>
+            <div class="button" onclick="window.open('https://now.gg/apps/aptoide/5874/aptoide.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+    <!-- Màn hình 1 -->
+    <div class="screen">
+        <div class="header">Thiết Bị VPN Roblox</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png" alt="Genshin Impact">
+            </div>
+            <div class="button" onclick="window.open('https://mathstutor.life/apps/roblox-corporation/5349/roblox.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+
+    <!-- Màn hình 2 -->
+    <div class="screen">
+        <div class="header">Thiết Bị VPN App Launcher</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.uncube.launcher3%2Ficon%2Fnow.png&w=256&q=80&w=1440&q=70" alt="App">
+            </div>
+            <div class="button" onclick="window.open('https://now.gg/apps/cognosphere-pte-ltd-/7074/genshin-impact.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+
+    <!-- Màn hình 3 -->
+    <div class="screen">
+        <div class="header">Thiết Bị VPN Genshin Inpact</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/apps-content/com.miHoYo.GenshinImpact/icon/genshin-impact.png" alt="Minecraft">
+            </div>
+            <div class="button" onclick="window.open('https://now.gg/apps/cognosphere-pte-ltd-/1773/genshin-impact.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+
+    <!-- Màn hình 4 -->
+    <div class="screen">
+        <div class="header">Thiết Bị VPN Discord</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.discord%2Ficon%2Fdiscord-talk-chat-hang-out.png&w=256&q=80&w=1440&q=70" alt="Free Fire">
+            </div>
+            <div class="button" onclick="window.open('https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+    
+        <!-- Màn hình 29 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Monster</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/apps-content/com.bigbluebubble.singingmonsters.full/icon/singing-monsters.png" alt="Final Fantasy">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/big-blue/8811/singing-monsters.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div> 
+    
+    <!-- Màn hình 29 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Final Fantasy</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.square_enix.android_googleplay.ff7ecww%2Ficon%2Ffinal-fantasy-vii-ever-crisis.png&w=256&q=80&w=1440&q=70" alt="Final Fantasy">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/a/10018/b.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div> 
+    <!-- Màn hình 11 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Ameow Us</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.innersloth.spacemafia%2Ficon%2Famong-us.png&w=256&q=80&w=1440&q=70" alt="Ameow Us">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/innersloth-llc/4047/among-us.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 24 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Fortnite Mobile</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Fortnite_F_lettermark_logo.png" alt="Fortnite">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/uncube/10004/now.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+    <!-- Màn hình 5 -->
+    <div class="screen">
+        <div class="header">Thiết Bị VPN Geometry Dash</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.nowgg.h5.pub501.app51387%2Ficon%2Fgeometry-dash.png&w=256&q=80&w=1440&q=70" alt="PUBG">
+            </div>
+            <div class="button" onclick="window.open('https://now.gg/apps/griffpatch/51387/geometry-dash.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+    
+      <!-- Màn hình 6 -->
+    <div class="screen">
+        <div class="header">Thiết Bị VPN Honkai Star</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/apps-content/com.HoYoverse.hkrpgoversea/icon/honkai-star-rail.png" alt="PUBG">
+            </div>
+            <div class="button" onclick="window.open('https://now.gg/apps/cognosphere-pte-ltd/1591/honkai-star-rail.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+            
+
+  <!-- Màn hình 7 --><div class="screen">
+        <div class="header">Thiết Bị VPN Poppy Playtime</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.MOBGames.PoppyMobileChap1%2Ficon%2Fpoppy-playtime.png&w=256&q=80&w=1440&q=70 alt="PUBG">
+            </div>
+            <div class="button" onclick="window.open('https://now.gg/apps/mob-games-studio/1293/poppy-playtime.html', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+    
+    <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị VPN Brawl Guys</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2F9038%2Ficon%2Fbrawl-guys.png&w=256&q=80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://now.gg/apps/tataki-studio/9038/brawl-guys.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+<!-- Màn hình 21 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Gacha Life</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fair.com.lunime.gachalife%2Ficon%2Fgacha-life.png&w=256&q=80&w=1440&q=70" alt="Gacha Life">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/lunime/5767/gacha-life.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 9 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Electric Trains</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.ekindiegames.ElectricTrainsPro%2Ficon%2Felectric-trains-pro.png&w=256&q=80&w=1440&q=70" alt="Minecraft">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/npc-games/1988/electric-trains-pro.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+
+<!-- Màn hình 16 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Free Fire</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.dts.freefireth%2Ficon%2Ffree-fire.png&w=256&q=80&w=1440&q=70" alt="Free Fire">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/garena-international-i/1398/free-fire.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 9 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Auto Chess</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.dragonest.autochess.nowgg%2Ficon%2Fauto-chess.png&w=256&q=80&w=1440&q=70" alt="Minecraft">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/dragonest/2404/auto-chess.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 26 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN World Box</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.mkarpenko.worldbox%2Ficon%2Fworldbox-sandbox-god-simulator.png&w=256&q=80&w=1440&q=70" alt="World Box">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/maxim-karpenko/1658/worldbox.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 12 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Punishing</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.kurogame.gplay.punishing.grayraven.en%2Ficon%2Fgray-raven.png&w=256&q=80&w=1440&q=70" alt="Punishing Gray Raven">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/kuro-technology/9609/gray-raven.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 13 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Arknights</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.YoStarEN.Arknights%2Ficon%2Farknights.png&w=256&q=80&w=1440&q=70" alt="Shadow Fight 3">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/yostar-limited/2211/arknights.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 25 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Scarlett Girl</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/apps-content/9887/icon/scarlet-girls.png" alt="Scarlett Girl">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/burstgame/9887/scarlet-girls.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 9 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Lords Mobile</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.igg.android.lordsmobile%2Ficon%2Flords-mobile.png&w=256&q=80&w=1440&q=70" alt="Minecraft">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/igg-com/2581/lords-mobile.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 9 -->
+<div class="screen">
+    <div class="header">Thiết Bị VPN Final Fantasy</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fapps-content%2Fcom.machinezone.ffane%2Ficon%2Ffinal-fantasy-xv-war-for-eos.png&w=256&q=80&w=1440&q=70" alt="Minecraft">
+        </div>
+        <div class="button" onclick="window.open('https://now.gg/apps/machine-zone-inc-/1992/final-fantasy-xv-war-for-eos.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html
